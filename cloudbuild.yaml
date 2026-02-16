@@ -1,0 +1,15 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'build',
+      '-t',
+      'gcr.io/face-recognition-python-487012/facerecog-app',
+      '-f',
+      'Dockerfile',
+      'facerecog'
+    ]
+
+images:
+- 'gcr.io/face-recognition-python-487012/facerecog-app'
+
