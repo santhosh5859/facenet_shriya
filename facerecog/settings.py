@@ -27,7 +27,8 @@ SECRET_KEY = "django-insecure-pw^%!*e$k*r_85!+b^8kgfjnb+v0x0f9%yrlybwa@ml=(=^l(e
 DEBUG = True
 
 # ALLOWED_HOSTS = ["10.14.20.241", "127.0.0.1"]
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
 
 
 # Application definition
