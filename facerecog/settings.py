@@ -76,17 +76,26 @@ WSGI_APPLICATION = "facerecog.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "facenet",
+#         "USER": "root",
+#         "PASSWORD": "12345678",
+#         "HOST": "localhost",
+#         "PORT": "3306"
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "facenet",
-        "USER": "root",
-        "PASSWORD": "12345678",
-        "HOST": "localhost",
-        "PORT": "3306"
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": "3306",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
