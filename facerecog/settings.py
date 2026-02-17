@@ -28,12 +28,16 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ["10.14.20.241", "127.0.0.1", "facenet-shriya-603287167298.asia-south1.run.app"]
 # ALLOWED_HOSTS = ["10.14.20.183", "127.0.0.1"]
-ALLOWED_HOSTS = [
-    "10.14.20.183",
-    "127.0.0.1",
-    "facenet-shriya-603287167298.asia-south1.run.app",
-]
+# ALLOWED_HOSTS = [
+#     "10.14.20.183",
+#     "127.0.0.1",
+#     "facenet-shriya-603287167298.asia-south1.run.app",
+# ]
 
+
+ALLOWED_HOSTS = [
+    "*"
+]
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
 
