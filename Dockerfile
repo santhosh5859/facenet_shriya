@@ -1,27 +1,33 @@
-FROM python:3.11-slim
+# Use Python 3.12
+FROM python:3.12-slim
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Prevent python from buffering stdout/stderr
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
+WORKDIR /app
+
+# Install system dependencies required for:
+# mysqlclient, mediapipe, opencv, tensorflow
 RUN apt-get update && apt-get install -y \
     build-essential \
     default-libmysqlclient-dev \
     pkg-config \
     libgl1 \
     libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+# Copy requirements first (Docker layer optimization)
+COPY requirements.txt .
 
-COPY requirements.txt /app/
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip setuptools==69.5.1 wheel \
+    && pip install -r requirements.txt
 
-COPY . /app/
+# Copy project
+COPY . .
 
+# Expose port
 EXPOSE 8080
 
-CMD ["gunicorn", "facerecog.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "1"]
+# Run using Gunicorn
+CMD ["gunicorn", "facerecog.wsgi:application", "--bind", "0.0.0.0:8080"]
