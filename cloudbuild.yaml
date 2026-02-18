@@ -5,9 +5,30 @@ steps:
       'build',
       '-t',
       'gcr.io/face-recognition-python-487012/facerecog-app',
-      '-f',
-      'Dockerfile',
       '.'
+    ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'push',
+      'gcr.io/face-recognition-python-487012/facerecog-app'
+    ]
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    [
+      'run',
+      'deploy',
+      'facenet-shriya',
+      '--image',
+      'gcr.io/face-recognition-python-487012/facerecog-app',
+      '--region',
+      'asia-south1',
+      '--platform',
+      'managed',
+      '--allow-unauthenticated'
     ]
 
 images:
