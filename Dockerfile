@@ -30,4 +30,12 @@ COPY . .
 EXPOSE 8080
 
 # Run using Gunicorn
-CMD ["gunicorn", "facerecog.wsgi:application", "--bind", "0.0.0.0:8080"]
+# CMD ["gunicorn", "facerecog.wsgi:application", "--bind", "0.0.0.0:8080"]
+
+CMD exec gunicorn facerecog.wsgi:application \
+    --bind :$PORT \
+    --workers 1 \
+    --threads 1 \
+    --timeout 0
+
+
